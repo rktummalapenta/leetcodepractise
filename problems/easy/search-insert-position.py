@@ -17,6 +17,10 @@ Input: nums = [1,3,5,6], target = 7
 Output: 4
 Example 4:
 
+Input: nums = [1,3,5,6,8,9], target = 7, 2
+Output: 4
+
+
 Input: nums = [1,3,5,6], target = 0
 Output: 0
 Example 5:
@@ -34,5 +38,45 @@ nums contains distinct values sorted in ascending order.
 
 """
 
+from typing import List
+
 class Solution:
+
     def searchInsert(self, nums: List[int], target: int) -> int:
+
+        length = len(nums)
+
+        l = 0
+        r = length - 1
+        value = 0
+
+        if nums[0] >= target:
+            return 0
+        elif nums[-1] < target:
+            return length
+        elif nums[-1] == target:
+            return length - 1
+
+        while l <= r:
+
+            mid = (l+r)//2
+
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                l = mid + 1
+                value = l
+            elif nums[mid] > target:
+                r = mid - 1
+                value = mid
+
+        return value
+
+
+a = Solution()
+nums = [1,3,5,6]
+target = 0
+print(a.searchInsert(nums, target))
+
+
+
